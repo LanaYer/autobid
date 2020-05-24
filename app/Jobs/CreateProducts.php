@@ -23,6 +23,7 @@ class CreateProducts implements ShouldQueue
 
     //Конечный предел цены
     protected $priceTo = 10000;
+
     /**
      * Execute the job.
      *

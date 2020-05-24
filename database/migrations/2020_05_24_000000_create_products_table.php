@@ -17,9 +17,9 @@ class CreateProductsTable extends Migration
             $table->integer('id')->autoIncrement();
             $table->string('barcode');
             $table->integer('price');
-            $table->dateTime('updated_at');
-            $table->dateTime('created_at');
-            $table->dateTime('removed_at')->nullable();
+            $table->timestamp('updated_at');
+            $table->timestamp('created_at');
+            $table->timestamp('removed_at')->nullable();
         });
     }
 
