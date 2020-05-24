@@ -20,6 +20,7 @@ class CreateCart extends Command
      */
     public function handle()
     {
-        echo 1;
+        $job = new \App\Jobs\CreateCart();
+        $job->handle();
     }
 }

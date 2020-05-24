@@ -16,6 +16,9 @@ class CreateIterationsTable extends Migration
         Schema::create('iterations', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->integer('time_start');
+            $table->dateTime('updated_at');
+            $table->dateTime('created_at');
+            $table->dateTime('removed_at')->nullable();
         });
     }
 

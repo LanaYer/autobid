@@ -15,8 +15,11 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
-            $table->string('name');
+            $table->string('barcode');
             $table->integer('price');
+            $table->dateTime('updated_at');
+            $table->dateTime('created_at');
+            $table->dateTime('removed_at')->nullable();
         });
     }
 

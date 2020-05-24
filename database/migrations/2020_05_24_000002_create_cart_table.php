@@ -17,6 +17,9 @@ class CreateCartTable extends Migration
             $table->integer('id')->autoIncrement();
             $table->integer('iteration_id');
             $table->integer('product_id');
+            $table->dateTime('updated_at');
+            $table->dateTime('created_at');
+            $table->dateTime('removed_at')->nullable();
         });
     }
 

@@ -20,6 +20,7 @@ class CreateProducts extends Command
      */
     public function handle()
     {
-        echo 1;
+        $job = new \App\Jobs\CreateProducts();
+        $job->handle();
     }
 }
