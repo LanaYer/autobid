@@ -79,10 +79,6 @@ class CreateCart implements ShouldQueue
                 //die;
             }
 
-            // Выводим результат итерации
-            echo $i . ": количество товаров - " . $selectedCount . ", сумма - "
-                . $selectedPrice . ", отступ - " . $offset . ";\n";
-
             //Сравнимаем разницу требуемой суммы и общей суммы выборки с заданной точностью
             if ((($selectedPrice - $this->maxSumPrice) > $this->pricePrecision) && $selectedCount > $this->countFrom) {
                 $offset = $offset + $this->priceStep;
@@ -97,16 +93,27 @@ class CreateCart implements ShouldQueue
         //Выполняем до тех пор, пока сумма выборки больше максимальной требуемой
         } while ($selectedPrice > $this->maxSumPrice && $selectedCount > $this->countFrom);
 
+        // Выводим результат итерации
+        echo "Количество итераций - " . ($i - 1) . "\n" .
+            "Количество товаров - " . $selectedCount . "\n" .
+            "Общая стоимость - " . $selectedPrice . "\n\n" .
+            "Запись в таблицу . . .";
+
         // Перед обновлением данных чищаем таблицу корзина
         Cart::query()->truncate();
 
         $cartItems = self::makeQuery($limit, $offset, $maxPrice)->pluck('id');
 
+        // Задаем случайный id пользователя. Если бы была таблица пользователей, id был бы реальный
+        $user_id = rand(1, 5);
+
         foreach ($cartItems as $item) {
             $cartItem = new Cart();
-            $cartItem->iteration_id = $i;
+            $cartItem->user_id = $user_id;
             $cartItem->product_id = $item;
             $cartItem->save();
         }
+
+        echo "Корзина создана";
     }
 }
